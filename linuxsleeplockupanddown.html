@@ -1,0 +1,507 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>LinuxSleeplockUp&Down · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="xv6sleeplock.html" />
+    
+    
+    <link rel="prev" href="./" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.2" data-path="linuxsleeplockupanddown.html">
+            
+                <a href="linuxsleeplockupanddown.html">
+            
+                    
+                    LinuxSleeplockUp&Down
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="xv6sleeplock.html">
+            
+                <a href="xv6sleeplock.html">
+            
+                    
+                    Xv6Sleeplock
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >LinuxSleeplockUp&Down</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="includelinuxsemaphoreh">include/linux/semaphore.h</h1>
+<h3 id="&#x4FE1;&#x53F7;&#x91CF;&#x6570;&#x636E;&#x7ED3;&#x6784;">&#x4FE1;&#x53F7;&#x91CF;&#x6570;&#x636E;&#x7ED3;&#x6784;</h3>
+<p>&#x4FE1;&#x53F7;&#x91CF;&#x662F;&#x4E00;&#x79CD;&#x7ECF;&#x5178;&#x7684;&#x540C;&#x6B65;&#x673A;&#x5236;&#xFF0C;&#x7528;&#x4E8E;&#x63A7;&#x5236;&#x5E76;&#x53D1;&#x8BBF;&#x95EE;&#x7684;&#x540C;&#x6B65;&#x673A;&#x5236;&#x3002;&#x5728;Linux&#x5185;&#x6838;&#x4E2D;&#xFF0C;&#x4FE1;&#x53F7;&#x91CF;&#x901A;&#x8FC7;struct semaphore&#x7ED3;&#x6784;&#x4F53;&#x6765;&#x5B9E;&#x73B0;&#xFF0C;&#x5B83;&#x7684;&#x4E3B;&#x8981;&#x7279;&#x70B9;&#x662F;&#xFF1A;</p>
+<ul>
+<li>&#x652F;&#x6301;&#x591A;&#x8FDB;&#x7A0B;&#x6216;&#x591A;&#x7EBF;&#x7A0B;&#x4E4B;&#x95F4;&#x7684;&#x540C;&#x6B65;&#x3002;</li>
+<li>&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x4FDD;&#x62A4;&#x5171;&#x4EAB;&#x8D44;&#x6E90;&#x7684;&#x8BBF;&#x95EE;&#x3002;</li>
+</ul>
+<p>&#x5F53;&#x67D0;&#x4E2A;&#x8FDB;&#x7A0B;&#x6216;&#x7EBF;&#x7A0B;&#x9700;&#x8981;&#x8BBF;&#x95EE;&#x5171;&#x4EAB;&#x8D44;&#x6E90;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x5148;&#x5C1D;&#x8BD5;&#x83B7;&#x53D6;&#x4FE1;&#x53F7;&#x91CF;&#x3002;&#x5982;&#x679C;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x8BA1;&#x6570;&#x5668;&#x5927;&#x4E8E;0&#xFF0C;&#x8868;&#x793A;&#x6709;&#x53EF;&#x7528;&#x7684;&#x8D44;&#x6E90;&#xFF0C;&#x8BE5;&#x8FDB;&#x7A0B;&#x6216;&#x7EBF;&#x7A0B;&#x5C31;&#x53EF;&#x4EE5;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#xFF0C;&#x5E76;&#x5C06;&#x4FE1;&#x53F7;&#x91CF;&#x8BA1;&#x6570;&#x5668;&#x51CF;1&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x5B83;&#x4F1A;&#x88AB;&#x963B;&#x585E;&#x5E76;&#x52A0;&#x5165;&#x7B49;&#x5F85;&#x961F;&#x5217;&#xFF0C;&#x76F4;&#x5230;&#x6709;&#x5176;&#x4ED6;&#x8FDB;&#x7A0B;&#x6216;&#x7EBF;&#x7A0B;&#x91CA;&#x653E;&#x4E86;&#x8D44;&#x6E90;&#x5E76;&#x589E;&#x52A0;&#x4E86;&#x4FE1;&#x53F7;&#x91CF;&#x8BA1;&#x6570;&#x5668;&#x3002;<br>&#x4E0B;&#x65B9;&#x662F;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x7ED3;&#x6784;&#x5B9A;&#x4E49;&#xFF1A;</p>
+<pre><code>struct semaphore {
+    raw_spinlock_t        lock;
+    unsigned int        count;
+    struct list_head    wait_list;
+};
+</code></pre><ul>
+<li>lock: &#x81EA;&#x65CB;&#x9501;&#x53D8;&#x91CF;&#xFF0C;&#x7528;&#x4E8E;&#x4FDD;&#x62A4;count&#x548C;wait_list</li>
+<li>count: &#x662F;&#x8868;&#x793A;&#x5F53;&#x524D;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x8BA1;&#x6570;&#x5668;&#x503C;&#xFF0C;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x8BA1;&#x6570;&#x5668;&#x8868;&#x793A;&#x53EF;&#x7528;&#x8D44;&#x6E90;&#x7684;&#x6570;&#x91CF;&#x3002;&#x5F53;&#x8BA1;&#x6570;&#x5668;&#x5927;&#x4E8E;&#x96F6;&#x65F6;&#xFF0C;&#x8868;&#x793A;&#x6709;&#x53EF;&#x7528;&#x8D44;&#x6E90;&#xFF0C;&#x53EF;&#x4EE5;&#x7EE7;&#x7EED;&#x8BBF;&#x95EE;&#x5171;&#x4EAB;&#x8D44;&#x6E90;&#xFF1B;&#x5F53;&#x8BA1;&#x6570;&#x5668;&#x7B49;&#x4E8E;&#x96F6;&#x65F6;&#xFF0C;&#x8868;&#x793A;&#x8D44;&#x6E90;&#x5DF2;&#x7ECF;&#x88AB;&#x5360;&#x7528;&#xFF0C;&#x9700;&#x8981;&#x7B49;&#x5F85;&#x5176;&#x4ED6;&#x8FDB;&#x7A0B;&#x6216;&#x7EBF;&#x7A0B;&#x91CA;&#x653E;&#x8D44;&#x6E90;</li>
+<li>wait_list: &#x7B49;&#x5F85;&#x672C;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x6240;&#x6709;&#x7761;&#x7720;&#x8FDB;&#x7A0B;&#x3002;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x94FE;&#x8868;&#x7684;&#x5934;&#x7ED3;&#x6784;&#xFF0C;&#x7528;&#x4E8E;&#x7EF4;&#x62A4;&#x7B49;&#x5F85;&#x8BE5;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x8FDB;&#x7A0B;&#x6216;&#x7EBF;&#x7A0B;&#x7684;&#x961F;&#x5217;&#x3002;&#x5F53;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x6216;&#x7EBF;&#x7A0B;&#x7B49;&#x5F85;&#x4FE1;&#x53F7;&#x91CF;&#x65F6;&#xFF0C;&#x5B83;&#x4F1A;&#x5C06;&#x81EA;&#x5DF1;&#x7684;&#x63A7;&#x5236;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF08;&#x5982;&#x8FDB;&#x7A0B;&#x63A7;&#x5236;&#x5757;&#x6216;&#x7EBF;&#x7A0B;&#x63A7;&#x5236;&#x5757;&#xFF09;&#x6DFB;&#x52A0;&#x5230; wait_list &#x94FE;&#x8868;&#x4E2D;&#x3002;&#x5F53;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x8BA1;&#x6570;&#x5668;&#x4E3A;&#x96F6;&#x65F6;&#xFF0C;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x7684;&#x8FDB;&#x7A0B;&#x6216;&#x7EBF;&#x7A0B;&#x4F1A;&#x88AB;&#x653E;&#x7F6E;&#x5728;&#x8BE5;&#x94FE;&#x8868;&#x4E2D;&#xFF0C;&#x76F4;&#x5230;&#x6709;&#x5176;&#x4ED6;&#x8FDB;&#x7A0B;&#x6216;&#x7EBF;&#x7A0B;&#x91CA;&#x653E;&#x8D44;&#x6E90;&#x3002;</li>
+</ul>
+<h3 id="&#x4FE1;&#x53F7;&#x91CF;&#x521D;&#x59CB;&#x5316;">&#x4FE1;&#x53F7;&#x91CF;&#x521D;&#x59CB;&#x5316;</h3>
+<pre><code>#define __SEMAPHORE_INITIALIZER(name, n)                \
+{                                    \
+    .lock        = __RAW_SPIN_LOCK_UNLOCKED((name).lock),    \
+    .count        = n,                        \
+    .wait_list    = LIST_HEAD_INIT((name).wait_list),        \
+}
+
+#define DEFINE_SEMAPHORE(_name, _n)    \
+    struct semaphore _name = __SEMAPHORE_INITIALIZER(_name, _n)
+
+static inline void sema_init(struct semaphore *sem, int val)
+{
+    static struct lock_class_key __key;
+    *sem = (struct semaphore) __SEMAPHORE_INITIALIZER(*sem, val);
+    lockdep_init_map(&amp;sem-&gt;lock.dep_map, &quot;semaphore-&gt;lock&quot;, &amp;__key, 0);
+}
+</code></pre><p>&#x521D;&#x59CB;&#x5316;&#x4E00;&#x4E2A;&#x65B0;&#x7684;&#x4FE1;&#x53F7;&#x91CF;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x521D;&#x59CB;&#x8BA1;&#x6570;&#x5668;&#x503C;&#x3002;<br>&#x652F;&#x6301;&#x4E24;&#x79CD;&#x521D;&#x59CB;&#x5316;&#x65B9;&#x5F0F;&#xFF0C;&#x4E00;&#x79CD;&#x662F;&#x5B8F;&#x5B9A;&#x4E49;&#x7684;&#x65B9;&#x5F0F;&#x58F0;&#x660E;&#xFF0C;&#x4E00;&#x79CD;&#x662F;&#x663E;&#x5F0F;&#x8C03;&#x7528;&#x3002;</p>
+<hr>
+<h1 id="kernellockingsemaphorec">kernel/locking/semaphore.c</h1>
+<h3 id="&#x5404;&#x7C7B;down&#x64CD;&#x4F5C;&#x4E0E;&#x7528;&#x9014;">&#x5404;&#x7C7B;down&#x64CD;&#x4F5C;&#x4E0E;&#x7528;&#x9014;</h3>
+<pre><code>void __sched down(struct semaphore *sem);
+int __sched down_interruptible(struct semaphore *sem);
+int __sched down_killable(struct semaphore *sem);
+int __sched down_timeout(struct semaphore *sem, long timeout);
+int __sched down_trylock(struct semaphore *sem);
+</code></pre><ul>
+<li>down&#xFF1A;&#x83B7;&#x53D6;&#x4FE1;&#x53F7;&#x91CF;sem(&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x503C;&#x51CF; 1)&#xFF0C;&#x5F53;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x503C;&#x975E;&#x8D1F;&#x65F6;&#xFF0C;&#x53EF;&#x4EE5;&#x7ACB;&#x5373;&#x83B7;&#x53D6;&#x4FE1;&#x53F7;&#x91CF;&#xFF0C;&#x5426;&#x5219;&#x8FDB;&#x7A0B;&#x4F11;&#x7720;&#x3002;&#x8BE5;&#x51FD;&#x6570;&#x7528;&#x4E8E;&#x83B7;&#x5F97;&#x4FE1;&#x53F7;&#x91CF;&#xFF0C;&#x5B83;&#x4F1A;&#x5BFC;&#x81F4;&#x7761;&#x7720;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x80FD;&#x5728;&#x4E2D;&#x65AD;&#x4E0A;&#x4E0B;&#x6587;&#x4F7F;&#x7528;&#x8BE5;&#x51FD;&#x6570;&#x3002;&#x8BE5;&#x51FD;&#x6570;&#x5C06;&#x628A;sem&#x7684;&#x503C;&#x51CF;1&#xFF0C;&#x5982;&#x679C;&#x4FE1;&#x53F7;&#x91CF;sem&#x7684;&#x503C;&#xFF0C;&#x5C31;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#xFF0C;&#x5426;&#x5219;&#x8C03;&#x7528;&#x8005;&#x5C06;&#x88AB;&#x6302;&#x8D77;&#xFF0C;&#x76F4;&#x5230;&#x522B;&#x7684;&#x4EFB;&#x52A1;&#x91CA;&#x653E;&#x8BE5;&#x4FE1;&#x53F7;&#x91CF;&#x624D;&#x80FD;&#x7EE7;&#x7EED;&#x8FD0;&#x884C;&#x3002;</li>
+<li>down_interruptible&#xFF1A;&#x540C; down()&#xFF0C;&#x533A;&#x522B;&#x662F;&#x82E5;&#x83B7;&#x53D6;&#x4E0D;&#x5230;&#x8FDB;&#x5165; TASK_INTERRUPTIBLE &#x72B6;&#x6001;&#xFF0C;&#x652F;&#x6301;&#x88AB;&#x4FE1;&#x53F7;&#x5524;&#x9192;&#x3002;down&#x4E0D;&#x4F1A;&#x88AB;&#x4FE1;&#x53F7;&#xFF08;signal&#xFF09;&#x6253;&#x65AD;&#xFF0C;&#x4F46;down_interruptible&#x80FD;&#x88AB;&#x4FE1;&#x53F7;&#x6253;&#x65AD;&#xFF0C;&#x56E0;&#x6B64;&#x8BE5;&#x51FD;&#x6570;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#x6765;&#x533A;&#x5206;&#x662F;&#x6B63;&#x5E38;&#x8FD4;&#x56DE;&#x8FD8;&#x662F;&#x88AB;&#x4FE1;&#x53F7;&#x4E2D;&#x65AD;&#xFF0C;&#x5982;&#x679C;&#x8FD4;&#x56DE;0&#xFF0C;&#x8868;&#x793A;&#x83B7;&#x5F97;&#x4FE1;&#x53F7;&#x91CF;&#x6B63;&#x5E38;&#x8FD4;&#x56DE;&#xFF0C;&#x5982;&#x679C;&#x88AB;&#x4FE1;&#x53F7;&#x6253;&#x65AD;&#xFF0C;&#x8FD4;&#x56DE;-EINTR&#x3002;</li>
+<li>down_killable&#xFF1A;&#x540C; down()&#xFF0C;&#x533A;&#x522B;&#x662F;&#x82E5;&#x83B7;&#x53D6;&#x4E0D;&#x5230;&#x8FDB;&#x5165; TASK_KILLABLE(TASK_WAKEKILL | TASK_UNINTERRUPTIBLE)&#x72B6;&#x6001;&#xFF0C;&#x8868;&#x793A;&#x53EA;&#x53EF;&#x88AB; SIGKILL &#x4FE1;&#x53F7;&#x5524;&#x9192;&#x3002;&#x7761;&#x7720;&#x7684;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x56E0;&#x4E3A;&#x53D7;&#x5230;&#x81F4;&#x547D;&#x4FE1;&#x53F7;&#x800C;&#x88AB;&#x5524;&#x9192;&#xFF0C;&#x4E2D;&#x65AD;&#x83B7;&#x53D6;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x64CD;&#x4F5C;&#x3002;</li>
+<li>down_timeout&#xFF1A;&#x540C;down()&#xFF0C;&#x533A;&#x522B;&#x662F;&#x82E5;&#x83B7;&#x53D6;&#x4E0D;&#x5230;&#x4E0D;&#x4F1A;&#x4E00;&#x76F4;&#x7B49;&#x5F85;&#xFF0C;&#x5728;jiffies&#x4E2A;&#x65F6;&#x949F;&#x5468;&#x671F;&#x540E;&#x5982;&#x679C;&#x8FD8;&#x6CA1;&#x6709;&#x83B7;&#x53D6;&#x4FE1;&#x53F7;&#x91CF;&#xFF0C;&#x5219;&#x8D85;&#x65F6;&#x8FD4;&#x56DE;&#xFF0C;&#x8FD4;&#x56DE;0&#x8868;&#x793A;&#x6210;&#x529F;&#x83B7;&#x53D6;&#x4FE1;&#x53F7;&#x91CF;&#xFF0C;&#x8FD4;&#x56DE;&#x8D1F;&#x503C;&#x8868;&#x793A;&#x8D85;&#x65F6;&#x3002;&#x5230;&#x671F;&#x540E;&#x81EA;&#x52A8;&#x5524;&#x9192;&#x3002;</li>
+<li>down_trylock&#xFF1A;&#x5C1D;&#x8BD5;&#x83B7;&#x53D6;&#x4FE1;&#x53F7;&#x91CF;&#xFF0C;&#x4E0D;&#x4F1A;&#x963B;&#x585E;&#xFF0C;&#x8FD4;&#x56DE;1&#x6210;&#x529F;&#xFF0C;0&#x5931;&#x8D25;&#x3002;</li>
+</ul>
+<h4 id="down">down</h4>
+<pre><code>void __sched down(struct semaphore *sem)
+{
+    unsigned long flags;
+
+    might_sleep();
+    raw_spin_lock_irqsave(&amp;sem-&gt;lock, flags);
+    if (likely(sem-&gt;count &gt; 0))
+        sem-&gt;count--;
+    else
+        __down(sem);
+    raw_spin_unlock_irqrestore(&amp;sem-&gt;lock, flags);
+}
+EXPORT_SYMBOL(down);
+</code></pre><p>&#x51FD;&#x6570;&#x5206;&#x6790;&#xFF1A;&#x51FD;&#x6570;&#x9996;&#x5148;&#x901A;&#x8FC7;&#x81EA;&#x65CB;&#x9501;raw_spin_lock_irqsave&#x7684;&#x8C03;&#x7528;&#x6765;&#x4FDD;&#x8BC1;&#x5BF9;sem-&gt;count&#x64CD;&#x4F5C;&#x7684;&#x539F;&#x5B50;&#x6027;&#x3002;&#x5982;&#x679C;count&gt;0&#xFF0C;&#x8868;&#x793A;&#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x4FE1;&#x53F7;&#x91CF;&#xFF0C;&#x5C06;count&#x7684;&#x503C;&#x51CF;1&#x7136;&#x540E;&#x9000;&#x51FA;&#x3002;&#x5982;&#x679C;count&#x4E0D;&#x5927;&#x4E8E;0&#xFF0C;&#x8868;&#x660E;&#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x65E0;&#x6CD5;&#x83B7;&#x53D6;&#x4FE1;&#x53F7;&#x91CF;&#xFF0C;&#x5219;&#x8C03;&#x7528;__down(sem)&#x51FD;&#x6570;&#xFF0C;&#x540E;&#x8005;&#x4F1A;&#x7EE7;&#x7EED;&#x8C03;&#x7528;__down_common&#x3002;</p>
+<h4 id="downinterruptible">down_interruptible</h4>
+<pre><code>int __sched down_interruptible(struct semaphore *sem)
+{
+    unsigned long flags;
+    int result = 0;
+
+    might_sleep();
+    raw_spin_lock_irqsave(&amp;sem-&gt;lock, flags);
+    if (likely(sem-&gt;count &gt; 0))
+        sem-&gt;count--;
+    else
+        result = __down_interruptible(sem);
+    raw_spin_unlock_irqrestore(&amp;sem-&gt;lock, flags);
+
+    return result;
+}
+EXPORT_SYMBOL(down_interruptible);
+</code></pre><p>&#x51FD;&#x6570;&#x5206;&#x6790;&#xFF1A;&#x4E0E;down&#x51FD;&#x6570;&#x76F8;&#x540C;&#xFF0C;&#x533A;&#x522B;&#x5728;&#x4E8E;count&#x4E0D;&#x5927;&#x4E8E;0&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x8C03;&#x7528;__down_interruptible&#xFF0C;&#x540E;&#x8005;&#x4F1A;&#x7EE7;&#x7EED;&#x8C03;&#x7528;__down_common&#x3002;</p>
+<pre><code>static noinline int __sched __down_interruptible(struct semaphore *sem)
+{
+    return __down_common(sem, TASK_INTERRUPTIBLE, MAX_SCHEDULE_TIMEOUT);
+}
+</code></pre><h4 id="downkillable">down_killable</h4>
+<pre><code>int __sched down_killable(struct semaphore *sem)
+{
+    unsigned long flags;
+    int result = 0;
+
+    might_sleep();
+    raw_spin_lock_irqsave(&amp;sem-&gt;lock, flags);
+    if (likely(sem-&gt;count &gt; 0))
+        sem-&gt;count--;
+    else
+        result = __down_killable(sem);
+    raw_spin_unlock_irqrestore(&amp;sem-&gt;lock, flags);
+
+    return result;
+}
+EXPORT_SYMBOL(down_killable);
+</code></pre><p>&#x51FD;&#x6570;&#x5206;&#x6790;&#xFF1A;&#x4E0E;down&#x51FD;&#x6570;&#x76F8;&#x540C;&#xFF0C;&#x533A;&#x522B;&#x5728;&#x4E8E;count&#x4E0D;&#x5927;&#x4E8E;0&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x8C03;&#x7528;__down_killable&#xFF0C;&#x540E;&#x8005;&#x4F1A;&#x7EE7;&#x7EED;&#x8C03;&#x7528;__down_common&#x3002;</p>
+<pre><code>static noinline int __sched __down_killable(struct semaphore *sem)
+{
+    return __down_common(sem, TASK_KILLABLE, MAX_SCHEDULE_TIMEOUT);
+}
+</code></pre><h4 id="downtimeout">down_timeout</h4>
+<pre><code>int __sched down_timeout(struct semaphore *sem, long timeout)
+{
+    unsigned long flags;
+    int result = 0;
+
+    might_sleep();
+    raw_spin_lock_irqsave(&amp;sem-&gt;lock, flags);
+    if (likely(sem-&gt;count &gt; 0))
+        sem-&gt;count--;
+    else
+        result = __down_timeout(sem, timeout);
+    raw_spin_unlock_irqrestore(&amp;sem-&gt;lock, flags);
+
+    return result;
+}
+EXPORT_SYMBOL(down_timeout);
+</code></pre><p>&#x51FD;&#x6570;&#x5206;&#x6790;&#xFF1A;&#x4E0E;down&#x51FD;&#x6570;&#x76F8;&#x540C;&#xFF0C;&#x533A;&#x522B;&#x5728;&#x4E8E;count&#x4E0D;&#x5927;&#x4E8E;0&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x8C03;&#x7528;__down_timeout&#xFF0C;&#x540E;&#x8005;&#x4F1A;&#x7EE7;&#x7EED;&#x8C03;&#x7528;__down_common&#x3002;</p>
+<pre><code>static noinline int __sched __down_timeout(struct semaphore *sem, long timeout)
+{
+    return __down_common(sem, TASK_UNINTERRUPTIBLE, timeout);
+}
+</code></pre><h4 id="downtrylock">down_trylock</h4>
+<pre><code>int __sched down_trylock(struct semaphore *sem)
+{
+    unsigned long flags;
+    int count;
+
+    raw_spin_lock_irqsave(&amp;sem-&gt;lock, flags);
+    count = sem-&gt;count - 1;
+    if (likely(count &gt;= 0))
+        sem-&gt;count = count;
+    raw_spin_unlock_irqrestore(&amp;sem-&gt;lock, flags);
+
+    return (count &lt; 0);
+}
+EXPORT_SYMBOL(down_trylock);
+</code></pre><p>&#x8BE5;&#x51FD;&#x6570;&#x8BD5;&#x7740;&#x83B7;&#x5F97;&#x4FE1;&#x53F7;&#x91CF;sem&#xFF0C;&#x5982;&#x679C;&#x80FD;&#x591F;&#x7ACB;&#x523B;&#x83B7;&#x5F97;&#xFF0C;&#x5B83;&#x5C31;&#x83B7;&#x5F97;&#x8BE5;&#x4FE1;&#x53F7;&#x91CF;&#x5E76;&#x8FD4;&#x56DE;0&#xFF0C;&#x5426;&#x5219;&#xFF0C;&#x8868;&#x793A;&#x4E0D;&#x80FD;&#x83B7;&#x5F97;&#x4FE1;&#x53F7;&#x91CF;sem&#xFF0C;&#x8FD4;&#x56DE;&#x503C;&#x4E3A;&#x975E;0&#x503C;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x5B83;&#x4E0D;&#x4F1A;&#x5BFC;&#x81F4;&#x8C03;&#x7528;&#x8005;&#x7761;&#x7720;&#xFF0C;&#x53EF;&#x4EE5;&#x5728;&#x4E2D;&#x65AD;&#x4E0A;&#x4E0B;&#x6587;&#x4F7F;&#x7528;&#x3002;</p>
+<h4 id="downcommon&#x51FD;&#x6570;">__down_common&#x51FD;&#x6570;</h4>
+<p>&#x5728;&#x4E0D;&#x540C;down&#x64CD;&#x4F5C;&#x4E0B;&#x5BF9;&#x8BE5;&#x51FD;&#x6570;&#x4F20;&#x5165;&#x4E86;&#x4E0D;&#x540C;&#x7684;&#x53C2;&#x6570;&#xFF0C;&#x8868;&#x793A;task&#x4E0D;&#x540C;&#x7684;&#x72B6;&#x6001;&#x3002;&#x8FD9;&#x4E9B;&#x72B6;&#x6001;&#x7684;&#x5B8F;&#x5B9A;&#x4E49;&#x5728;include/linux/sched.h&#x4E2D;&#x3002;&#x4E3E;&#x4F8B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<pre><code>#define TASK_RUNNING            0x00000000
+#define TASK_INTERRUPTIBLE        0x00000001
+#define TASK_UNINTERRUPTIBLE        0x00000002
+#define TASK_WAKEKILL            0x00000100
+#define TASK_KILLABLE            (TASK_WAKEKILL | TASK_UNINTERRUPTIBLE)
+</code></pre><p>&#x4EE5;&#x4E0B;&#x662F;__down_common&#x51FD;&#x6570;&#x672C;&#x8EAB;&#x3002;</p>
+<blockquote>
+<p>&#x6709;&#x4E00;&#x4E2A;&#x95EE;&#x9898;&#x5C31;&#x662F;&#x6211;&#x627E;&#x4E0D;&#x5230;trace_contention_begin()&#x548C;trace_contention_end()&#x7684;&#x5B9A;&#x4E49;&#xFF0C;&#x867D;&#x7136;&#x5E94;&#x8BE5;&#x4E0D;&#x5F71;&#x54CD;&#x6574;&#x4F53;&#x5206;&#x6790;&#x3002;</p>
+</blockquote>
+<pre><code>static inline int __sched __down_common(struct semaphore *sem, long state,
+                    long timeout)
+{
+    int ret;
+
+    trace_contention_begin(sem, 0);
+    ret = ___down_common(sem, state, timeout);
+    trace_contention_end(sem, ret);
+
+    return ret;
+}
+</code></pre><p>&#x5728;__down_common&#x51FD;&#x6570;&#x91CC;&#x8C03;&#x7528;___down_common()&#x51FD;&#x6570;&#x3002;</p>
+<pre><code>static inline int __sched ___down_common(struct semaphore *sem, long state,
+                                long timeout)
+{
+    struct semaphore_waiter waiter; //&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; waiter &#x7684;&#x4FE1;&#x53F7;&#x91CF;&#x7B49;&#x5F85;&#x8005;&#x7ED3;&#x6784;&#x4F53;
+
+    list_add_tail(&amp;waiter.list, &amp;sem-&gt;wait_list); //&#x5C06; waiter &#x7ED3;&#x6784;&#x4F53;&#x6DFB;&#x52A0;&#x5230;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x672B;&#x5C3E;&#x3002;&#x8FD9;&#x5C06;&#x628A;&#x5F53;&#x524D;&#x4EFB;&#x52A1;&#x6DFB;&#x52A0;&#x5230;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;&#xFF0C;&#x8868;&#x793A;&#x5B83;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x83B7;&#x53D6;&#x4FE1;&#x53F7;&#x91CF;
+    waiter.task = current; //&#x5C06;task&#x5173;&#x8054;&#x5230;&#x5F53;&#x524D;&#x6B63;&#x5728;&#x6267;&#x884C;&#x7684;&#x4EFB;&#x52A1;&#xFF08;&#x8FDB;&#x7A0B;&#x6216;&#x7EBF;&#x7A0B;&#xFF09;&#xFF0C;&#x8868;&#x793A;&#x8BE5;&#x7B49;&#x5F85;&#x8005;&#x5BF9;&#x5E94;&#x4E8E;&#x5F53;&#x524D;&#x4EFB;&#x52A1;&#x3002;
+    waiter.up = false; //&#x5C06;waiter&#x7ED3;&#x6784;&#x4F53;&#x7684;up&#x5B57;&#x6BB5;&#x8BBE;&#x7F6E;&#x4E3A;false&#xFF0C;&#x8868;&#x793A;&#x8BE5;&#x7B49;&#x5F85;&#x8005;&#x5C1A;&#x672A;&#x83B7;&#x5F97;&#x4FE1;&#x53F7;&#x91CF;&#x3002;
+
+    //&#x5F00;&#x59CB;&#x4E00;&#x4E2A;&#x65E0;&#x9650;&#x5FAA;&#x73AF;&#xFF0C;&#x7528;&#x4E8E;&#x7B49;&#x5F85;&#x83B7;&#x5F97;&#x4FE1;&#x53F7;&#x91CF;
+    for (;;) {
+        //&#x68C0;&#x67E5;&#x5F53;&#x524D;&#x4EFB;&#x52A1;&#x662F;&#x5426;&#x6709;&#x5F85;&#x5904;&#x7406;&#x7684;&#x4FE1;&#x53F7;&#xFF08;&#x5982;&#x4E2D;&#x65AD;&#x4FE1;&#x53F7;&#x6216;&#x7EC8;&#x6B62;&#x4FE1;&#x53F7;&#xFF09;&#x3002;&#x5982;&#x679C;&#x6709;&#xFF0C;&#x5219;&#x8DF3;&#x8F6C;&#x5230;&#x6807;&#x7B7E; interrupted&#xFF0C;&#x8868;&#x793A;&#x83B7;&#x53D6;&#x64CD;&#x4F5C;&#x88AB;&#x4E2D;&#x65AD;
+        if (signal_pending_state(state, current))
+            goto interrupted;
+        //&#x68C0;&#x67E5;&#x7B49;&#x5F85;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x662F;&#x5426;&#x5C0F;&#x4E8E;&#x7B49;&#x4E8E;&#x96F6;&#x3002;&#x5982;&#x679C;&#x662F;&#xFF0C;&#x5219;&#x8DF3;&#x8F6C;&#x5230;&#x6807;&#x7B7E; timed_out&#xFF0C;&#x8868;&#x793A;&#x7B49;&#x5F85;&#x8D85;&#x65F6;
+        if (unlikely(timeout &lt;= 0))
+            goto timed_out;
+        __set_current_state(state); //&#x5C06;&#x5F53;&#x524D;&#x4EFB;&#x52A1;&#x7684;&#x72B6;&#x6001;&#x8BBE;&#x7F6E;&#x4E3A; state&#xFF0C;&#x901A;&#x5E38;&#x662F;&#x4E00;&#x4E2A;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF08;&#x4F8B;&#x5982;&#xFF0C;TASK_INTERRUPTIBLE &#x6216; TASK_UNINTERRUPTIBLE&#xFF09;&#xFF0C;&#x8868;&#x793A;&#x4EFB;&#x52A1;&#x6B63;&#x5728;&#x7B49;&#x5F85;
+        raw_spin_unlock_irq(&amp;sem-&gt;lock); //&#x89E3;&#x9501;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x81EA;&#x65CB;&#x9501;&#xFF0C;&#x5141;&#x8BB8;&#x5176;&#x4ED6;&#x4EFB;&#x52A1;&#x8BBF;&#x95EE;&#x4FE1;&#x53F7;&#x91CF;
+        timeout = schedule_timeout(timeout); //&#x4F7F;&#x5F53;&#x524D;&#x4EFB;&#x52A1;&#x8FDB;&#x5165;&#x7761;&#x7720;&#x72B6;&#x6001;&#xFF0C;&#x5E76;&#x7B49;&#x5F85;&#x6307;&#x5B9A;&#x7684;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#x6216;&#x76F4;&#x5230;&#x88AB;&#x5524;&#x9192;
+        raw_spin_lock_irq(&amp;sem-&gt;lock); //&#x5F53;&#x88AB;&#x5524;&#x9192;&#x540E;&#xFF0C;&#x91CD;&#x65B0;&#x83B7;&#x53D6;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x81EA;&#x65CB;&#x9501;
+        //&#x68C0;&#x67E5;&#x7B49;&#x5F85;&#x8005;&#x7684; up &#x5B57;&#x6BB5;&#x662F;&#x5426;&#x88AB;&#x8BBE;&#x7F6E;&#x4E3A; true&#x3002;&#x5982;&#x679C;&#x662F;&#xFF0C;&#x8868;&#x793A;&#x8BE5;&#x7B49;&#x5F85;&#x8005;&#x5DF2;&#x7ECF;&#x6210;&#x529F;&#x83B7;&#x53D6;&#x4FE1;&#x53F7;&#x91CF;&#xFF08;&#x901A;&#x8FC7;&#x5176;&#x4ED6;&#x4EFB;&#x52A1;&#x91CA;&#x653E;&#x8D44;&#x6E90;&#xFF09;&#xFF0C;&#x51FD;&#x6570;&#x8FD4;&#x56DE; 0&#xFF0C;&#x8868;&#x793A;&#x83B7;&#x53D6;&#x6210;&#x529F;
+        if (waiter.up)
+            return 0;
+    }
+
+ timed_out:
+    list_del(&amp;waiter.list); //&#x4ECE;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;&#x5220;&#x9664; waiter &#x7ED3;&#x6784;&#x4F53;
+    return -ETIME; //&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x4EE3;&#x8868;&#x7B49;&#x5F85;&#x8D85;&#x65F6;&#x7684;&#x9519;&#x8BEF;&#x4EE3;&#x7801;-ETIME&#xFF0C;&#x8868;&#x793A;&#x7B49;&#x5F85;&#x8D85;&#x65F6;
+
+ interrupted:
+    list_del(&amp;waiter.list);
+    return -EINTR; //&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;&#x4EE3;&#x8868;&#x7B49;&#x5F85;&#x88AB;&#x4E2D;&#x65AD;&#x7684;&#x9519;&#x8BEF;&#x4EE3;&#x7801;-EINTR&#xFF0C;&#x8868;&#x793A;&#x83B7;&#x53D6;&#x8FC7;&#x7A0B;&#x88AB;&#x4E2D;&#x65AD;
+}
+</code></pre><p>&#x5728;__down_common&#x51FD;&#x6570;&#x6570;&#x6267;&#x884C;&#x4E86;&#x4EE5;&#x4E0B;&#x64CD;&#x4F5C;&#x3002;  </p>
+<ol>
+<li>&#x5C06;&#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x653E;&#x5230;&#x4FE1;&#x53F7;&#x91CF;&#x6210;&#x5458;&#x53D8;&#x91CF;wait_list&#x6240;&#x7BA1;&#x7406;&#x7684;&#x961F;&#x5217;&#x4E2D;&#x3002;  </li>
+<li>&#x5728;&#x4E00;&#x4E2A;for&#x5FAA;&#x73AF;&#x4E2D;&#x628A;&#x5F53;&#x524D;&#x7684;&#x8FDB;&#x7A0B;&#x72B6;&#x6001;&#x8FD9;&#x662F;&#x4E3A;TASK_INTERRUPTIBLE,&#x5728;&#x8C03;&#x7528;schedule_timeout&#x4F7F;&#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x8FDB;&#x5165;&#x7761;&#x7720;&#x72B6;&#x6001;&#xFF0C;&#x51FD;&#x6570;&#x5C06;&#x505C;&#x7559;&#x5728;schedule_timeout&#x8C03;&#x7528;&#x4E0A;&#xFF0C;&#x77E5;&#x9053;&#x518D;&#x6B21;&#x88AB;&#x8C03;&#x5EA6;&#x6267;&#x884C;&#x3002;  </li>
+<li>&#x5F53;&#x8BE5;&#x8FDB;&#x7A0B;&#x518D;&#x4E00;&#x6B21;&#x88AB;&#x8C03;&#x5EA6;&#x65F6;&#xFF0C;&#x6309;&#x539F;&#x56E0;&#x6267;&#x884C;&#x76F8;&#x5E94;&#x7684;&#x64CD;&#x4F5C;&#xFF1A;&#x5982;&#x679C;waiter.up&#x4E0D;&#x4E3A;0&#x8BF4;&#x660E;&#x8FDB;&#x7A0B;&#x88AB;&#x8BE5;&#x4FE1;&#x53F7;&#x91CF;&#x7684;up&#x64CD;&#x4F5C;&#x6240;&#x5524;&#x9192;&#xFF0C;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x4FE1;&#x53F7;&#x91CF;&#x3002;&#x5982;&#x679C;&#x8FDB;&#x7A0B;&#x662F;&#x56E0;&#x4E3A;&#x88AB;&#x7528;&#x6237;&#x7A7A;&#x95F4;&#x7684;&#x4FE1;&#x53F7;&#x6240;&#x4E2D;&#x65AD;&#x6216;&#x8D85;&#x65F6;&#x4FE1;&#x53F7;&#x6240;&#x5F15;&#x8D77;&#x7684;&#x5524;&#x9192;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x76F8;&#x5E94;&#x7684;&#x9519;&#x8BEF;&#x4EE3;&#x7801;&#x3002;</li>
+</ol>
+<p>&#x5176;&#x4E2D;&#x6D89;&#x53CA;&#x5230;&#x7684;&#x7ED3;&#x6784;&#x4F53;&#x4E3A;&#xFF1A;</p>
+<pre><code>struct semaphore_waiter {
+    struct list_head list;
+    struct task_struct *task;
+    bool up;
+};
+</code></pre><h3 id="up&#x64CD;&#x4F5C;">up&#x64CD;&#x4F5C;</h3>
+<p>&#x4EC5;&#x6709;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x91CA;&#x653E;&#x4FE1;&#x53F7;&#x91CF;sem&#xFF0C;&#x5373;&#x628A;sem&#x7684;&#x503C;&#x52A0;1&#xFF0C;&#x5982;&#x679C;sem&#x7684;&#x503C;&#x4E3A;&#x975E;&#x6B63;&#x6570;&#xFF0C;&#x8868;&#x660E;&#x6709;&#x4EFB;&#x52A1;&#x7B49;&#x5F85;&#x8BE5;&#x4FE1;&#x53F7;&#x91CF;&#xFF0C;&#x56E0;&#x6B64;&#x5524;&#x9192;&#x8FD9;&#x4E9B;&#x7B49;&#x5F85;&#x8005;&#x3002;</p>
+<pre><code>void __sched up(struct semaphore *sem)
+{
+    unsigned long flags;
+
+    raw_spin_lock_irqsave(&amp;sem-&gt;lock, flags);
+    if (likely(list_empty(&amp;sem-&gt;wait_list)))
+        sem-&gt;count++;
+    else
+        __up(sem);
+    raw_spin_unlock_irqrestore(&amp;sem-&gt;lock, flags);
+}
+EXPORT_SYMBOL(up);
+</code></pre><p>up()&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x88AB;&#x4EFB;&#x4F55;&#x4E0A;&#x4E0B;&#x6587;&#x8C03;&#x7528;&#xFF0C;&#x5305;&#x62EC;&#x4ECE;&#x672A;&#x8C03;&#x7528;down()&#x51FD;&#x6570;&#x7684;&#x4EFB;&#x52A1;&#x3002;&#x5176;&#x53C2;&#x6570;&#x662F;&#x4E00;&#x4E2A;&#x6307;&#x5411;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x6307;&#x9488;&#x3002;&#x5F53;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x8BA1;&#x6570;&#x503C;&#x88AB;&#x91CA;&#x653E;&#x65F6;&#xFF0C;&#x5C06;&#x4F1A;&#x5524;&#x9192;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#xFF0C;&#x4F7F;&#x5176;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#x3002;&#x8BA1;&#x6570;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x4E0A;&#x5347;&#x64CD;&#x4F5C;&#x4E0D;&#x4F1A;&#x5F15;&#x8D77;&#x8FDB;&#x7A0B;&#x7684;&#x7761;&#x7720;&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x4EE5;&#x5728;&#x4EFB;&#x4F55;&#x4E0A;&#x4E0B;&#x6587;&#x4E2D;&#x8C03;&#x7528;&#x3002;<br>&#x5728;&#x51FD;&#x6570;&#x5185;&#x90E8;&#xFF0C;&#x901A;&#x8FC7;&#x539F;&#x5B50;&#x64CD;&#x4F5C;rawspin_lock_irqsave()&#x548C;raw_spin_unlock_irqrestore()&#x4FDD;&#x8BC1;&#x4E86;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x539F;&#x5B50;&#x6027;&#x548C;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x6027;&#x3002;<br>&#x9996;&#x5148;&#xFF0C;&#x901A;&#x8FC7;list_empty()&#x51FD;&#x6570;&#x5224;&#x65AD;&#x7B49;&#x5F85;&#x961F;&#x5217;sem-&gt;wait_list&#x662F;&#x5426;&#x4E3A;&#x7A7A;&#x3002;&#x5982;&#x679C;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x5C06;&#x7B49;&#x5F85;&#x4FE1;&#x53F7;&#x91CF;&#x90A3;&#x4E48;&#x5C31;&#x76F4;&#x63A5;&#x5C06;count&#x8FDB;&#x884C;++&#xFF0C;&#x5982;&#x679C;&#x6709;&#x90A3;&#x4E48;&#x8C03;&#x7528;\_up(sem)&#x51FD;&#x6570;&#x8FDB;&#x884C;&#x5904;&#x7406;&#xFF0C;&#x5E76;&#x5C06;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x8BA1;&#x6570;&#x503C;&#x4FDD;&#x6301;&#x4E0D;&#x53D8;&#x3002;<br>&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x662F;&#x4E00;&#x4E2A;&#x975E;&#x963B;&#x585E;&#x51FD;&#x6570;&#xFF0C;&#x4E0D;&#x4F1A;&#x5F15;&#x8D77;&#x8FDB;&#x7A0B;&#x7684;&#x7761;&#x7720;&#x3002;&#x5982;&#x679C;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;&#x6709;&#x7B49;&#x5F85;&#x7684;&#x8FDB;&#x7A0B;&#xFF0C;&#x5219;&#x4F1A;&#x5524;&#x9192;&#x5176;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#xFF0C;&#x4F7F;&#x5176;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#xFF1B;&#x5426;&#x5219;&#xFF0C;&#x8BA1;&#x6570;&#x503C;&#x5C06;&#x4F1A;&#x589E;&#x52A0;1&#x3002;</p>
+<p>__up()&#x51FD;&#x6570;&#x5728;&#x4E0B;&#x65B9;&#x5217;&#x51FA;&#x3002;</p>
+<pre><code>static noinline void __sched __up(struct semaphore *sem)
+{
+    struct semaphore_waiter *waiter = list_first_entry(&amp;sem-&gt;wait_list,
+        struct semaphore_waiter, list); //&#x4ECE;&#x7B49;&#x5F85;&#x94FE;&#x8868;&#x4E2D;&#x53D6;&#x51FA;&#x7B2C;&#x4E00;&#x4E2A;&#x5728;&#x7B49;&#x5F85;&#x7684;&#x8FDB;&#x7A0B;
+    list_del(&amp;waiter-&gt;list); //&#x5C06;&#x5B83;&#x4ECE;&#x7B49;&#x5F85;&#x94FE;&#x8868;&#x4E2D;&#x5220;&#x9664;
+    waiter-&gt;up = true; //&#x6807;&#x8BC6;&#x5DF2;&#x7ECF;&#x83B7;&#x53D6;&#x5230;&#x4E86;&#x4FE1;&#x53F7;&#x91CF;
+    wake_up_process(waiter-&gt;task); //&#x5524;&#x9192;&#x5F97;&#x5230;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x8FDB;&#x7A0B;
+}
+</code></pre><h3 id="down&#x4E0E;up&#x64CD;&#x4F5C;&#x7684;&#x5B9E;&#x73B0;">down&#x4E0E;up&#x64CD;&#x4F5C;&#x7684;&#x5B9E;&#x73B0;</h3>
+<p>&#x5373;P&#x64CD;&#x4F5C;&#x548C;V&#x64CD;&#x4F5C;&#xFF08;&#x83B7;&#x53D6;&#x64CD;&#x4F5C;&#x548C;&#x91CA;&#x653E;&#x64CD;&#x4F5C;&#xFF09;&#x3002;&#x5728;Linux&#x5185;&#x6838;&#x4E2D;&#xFF0C;&#x5B83;&#x4EEC;&#x901A;&#x5E38;&#x88AB;&#x5206;&#x522B;&#x5B9E;&#x73B0;&#x4E3A;up()&#x548C;down_interruptible()&#x51FD;&#x6570;&#x3002;</p>
+<ul>
+<li>P&#x64CD;&#x4F5C;&#xFF08;&#x83B7;&#x53D6;&#x64CD;&#x4F5C;&#xFF09;&#xFF1A;&#x4F7F;&#x7528;down_interruptible()&#x51FD;&#x6570;&#x5B9E;&#x73B0;&#x3002;&#x5B83;&#x5C06;&#x4E00;&#x4E2A;&#x4E8C;&#x8FDB;&#x5236;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x503C;&#x51CF;1&#xFF0C;&#x6216;&#x8005;&#x5C06;&#x4E00;&#x4E2A;&#x8BA1;&#x6570;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x503C;&#x51CF;n&#xFF08;n&#x4E3A;&#x53C2;&#x6570;&#xFF09;&#x3002;&#x5982;&#x679C;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x503C;&#x4E3A;0&#xFF0C;&#x5219;&#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x4F1A;&#x88AB;&#x963B;&#x585E;&#xFF0C;&#x5E76;&#x52A0;&#x5165;&#x5230;&#x8BE5;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;&#x3002;</li>
+<li>V&#x64CD;&#x4F5C;&#xFF08;&#x91CA;&#x653E;&#x64CD;&#x4F5C;&#xFF09;&#xFF1A;&#x4F7F;&#x7528;up()&#x51FD;&#x6570;&#x5B9E;&#x73B0;&#x3002;&#x5B83;&#x5C06;&#x4E00;&#x4E2A;&#x4E8C;&#x8FDB;&#x5236;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x503C;&#x52A0;1&#xFF0C;&#x6216;&#x8005;&#x5C06;&#x4E00;&#x4E2A;&#x8BA1;&#x6570;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x503C;&#x52A0;n&#xFF08;n&#x4E3A;&#x53C2;&#x6570;&#xFF09;&#xFF0C;&#x5E76;&#x5524;&#x9192;&#x4EFB;&#x4F55;&#x7B49;&#x5F85;&#x8BE5;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x8FDB;&#x7A0B;&#x3002;</li>
+</ul>
+<p>&#x8BE6;&#x7EC6;&#x5B9E;&#x73B0;&#x89C1;&#x4E0A;&#x65B9;&#x51FD;&#x6570;&#x5206;&#x6790;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="./" class="navigation navigation-prev " aria-label="Previous page: Introduction">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="xv6sleeplock.html" class="navigation navigation-next " aria-label="Next page: Xv6Sleeplock">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"LinuxSleeplockUp&Down","level":"1.2","depth":1,"next":{"title":"Xv6Sleeplock","level":"1.3","depth":1,"path":"xv6sleeplock.md","ref":"xv6sleeplock.md","articles":[]},"previous":{"title":"Introduction","level":"1.1","depth":1,"path":"README.md","ref":"README.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"linuxsleeplockupanddown.md","mtime":"2023-10-25T05:31:28.732Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-11-01T06:57:38.044Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+

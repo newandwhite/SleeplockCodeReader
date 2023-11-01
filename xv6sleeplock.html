@@ -1,0 +1,308 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Xv6Sleeplock · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="linuxsleeplockupanddown.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="linuxsleeplockupanddown.html">
+            
+                <a href="linuxsleeplockupanddown.html">
+            
+                    
+                    LinuxSleeplockUp&Down
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.3" data-path="xv6sleeplock.html">
+            
+                <a href="xv6sleeplock.html">
+            
+                    
+                    Xv6Sleeplock
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Xv6Sleeplock</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <p>&#x6709;&#x65F6;&#xFF0C;xv6 &#x9700;&#x8981;&#x957F;&#x65F6;&#x95F4;&#x7684;&#x6301;&#x6709;&#x4E00;&#x4E2A;&#x9501;&#xFF0C;&#x6BD4;&#x5982;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x4F1A;&#x5728;&#x8BFB;&#x5199;&#x786C;&#x76D8;&#x4E0A;&#x7684;&#x5185;&#x5BB9;&#x65F6;&#x6301;&#x6709;&#x9501;&#xFF0C;&#x800C;&#x8FD9;&#x4E9B;&#x64CD;&#x4F5C;&#x5F80;&#x5F80;&#x8981;&#x82B1;&#x8D39;&#x6570;&#x5341;&#x6BEB;&#x7C73;&#x3002;&#x957F;&#x65F6;&#x95F4;&#x6301;&#x6709;&#x4E00;&#x4E2A; spinlock &#x4F1A;&#x5BFC;&#x81F4;&#x6D6A;&#x8D39;&#xFF0C;&#x56E0;&#x4E3A;&#x5728; spin &#x671F;&#x95F4; CPU &#x505A;&#x4E0D;&#x4E86;&#x4EFB;&#x4F55;&#x4E8B;&#x60C5;&#x3002;spinlock &#x7684;&#x53E6;&#x4E00;&#x4E2A;&#x7F3A;&#x9677;&#x662F;&#x5728;&#x6301;&#x7EED;&#x671F;&#x95F4;&#x5185;&#x4E0D;&#x80FD;&#x8BA9;&#x51FA; CPU&#x3002;&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x505A;&#x7684;&#x5C31;&#x662F;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x56E0;&#x4E3A;&#x4E00;&#x4E2A;&#x9501;&#x5728;&#x7B49;&#x5F85;&#x78C1;&#x76D8;&#x64CD;&#x4F5C;&#x7684;&#x82B1;&#xFF0C;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; CPU&#x3002;&#x6301;&#x6709; spinlock &#x671F;&#x95F4;&#x8BA9;&#x51FA; CPU &#x662F;&#x4E0D;&#x5408;&#x6CD5;&#x7684;&#xFF0C;&#x56E0;&#x4E3A;&#x5982;&#x679C;&#x5176;&#x4ED6;&#x8FDB;&#x7A0B;&#x83B7;&#x53D6;&#x8FD9;&#x4E2A;&#x9501;&#x4F1A;&#x5BFC;&#x81F4;&#x6574;&#x4E2A;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x6B7B;&#x9501;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x4E00;&#x79CD;&#x9501;&#xFF0C;&#x5F53;&#x6267;&#x884C; acquire &#x7684;&#x65F6;&#x5019;&#x8BA9;&#x51FA; CPU&#x3002;&#x5E76;&#x5728;&#x6301;&#x6709;&#x9501;&#x7684;&#x65F6;&#x5019;&#x5141;&#x8BB8;&#x8BA9;&#x51FA; CPU&#x3002;</p>
+<p>xv6 &#x63D0;&#x4F9B;&#x4E86;&#x8FD9;&#x6837;&#x4E00;&#x79CD;&#x9501; sleep-locks &#x4EE5;&#x5728;&#x7B49;&#x5F85;&#x65F6;&#x8BA9;&#x51FA; CPU&#x3002;&#x4ECE;&#x4E0A;&#x5C42;&#x6765;&#x8BB2;&#xFF0C;&#x4E00;&#x4E2A; sleeplock &#x62E5;&#x6709;&#x4E00;&#x4E2A;&#x8BA9; spinlock &#x4FDD;&#x62A4;&#x7684;&#x5B57;&#x6BB5; locked&#x3002;acquiresleep &#x5C06;&#x8C03;&#x7528; sleep &#x4EE5;&#x8BA9;&#x51FA; CPU&#xFF0C;&#x5E76;&#x91CA;&#x653E; spinlock&#x3002;&#x7ED3;&#x679C;&#x5C31;&#x662F;&#x5F53;&#x6267;&#x884C; acquiresleep &#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5176;&#x4ED6;&#x7EBF;&#x7A0B;&#x53EF;&#x4EE5;&#x6267;&#x884C;&#x3002;</p>
+<p>&#x7531;&#x4E8E; sleep-locks &#x542F;&#x7528;&#x4E86;&#x4E2D;&#x65AD;&#xFF0C;&#x6240;&#x4EE5;&#x4E0D;&#x80FD;&#x88AB;&#x7528;&#x4E8E;&#x4E2D;&#x65AD;&#x5904;&#x7406;&#x4E2D;&#x3002;&#x56E0;&#x4E3A;acquiresleep &#x53EF;&#x80FD;&#x4F1A;&#x8BA9;&#x51FA; CPU&#xFF0C;sleep-lock &#x4E0D;&#x80FD;&#x5728; spinlock &#x7684;&#x4E34;&#x754C;&#x533A;&#x5185;&#x4F7F;&#x7528;&#x3002;spin-locks &#x9002;&#x7528;&#x4E8E;&#x77ED;&#x4E34;&#x754C;&#x533A;&#xFF0C;&#x56E0;&#x4E3A;&#x7B49;&#x5F85;&#x603B;&#x4F1A;&#x6D6A;&#x8D39; CPU&#x3002;&#x800C; sleep-lock &#x5728;&#x8017;&#x65F6;&#x8F83;&#x957F;&#x7684;&#x64CD;&#x4F5C;&#x4E0A;&#x8868;&#x73B0;&#x5F88;&#x597D;&#x3002;</p>
+<h1 id="sleeplockh">sleeplock.h</h1>
+<p>sleeplock.h&#x5B9A;&#x4E49;&#x4E86;&#x7761;&#x7720;&#x9501;&#x7684;&#x7ED3;&#x6784;&#x5305;&#x542B;&#x8BB0;&#x5F55;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x88AB;&#x6301;&#x6709;&#x7684;locked&#x548C;&#x4FDD;&#x62A4;sleeplock&#x7684;spinlock&#xFF08;&#x4FDD;&#x62A4;&#x5BF9;&#x4E34;&#x754C;&#x53D8;&#x91CF;&#x7684;&#x8BBF;&#x95EE;&#xFF09;&#xFF0C;&#x8FD8;&#x6709;pid&#x548C;&#x9501;&#x540D;&#x3002;</p>
+<h1 id="sleeplockc">sleeplock.c</h1>
+<h3 id="initsleeplock">initsleeplock()</h3>
+<p>&#x901A;&#x8FC7;&#x8C03;&#x7528;initlock()&#x548C;&#x8D4B;&#x503C;&#x6765;&#x5BF9;&#x9501;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+<h3 id="acquiresleep">acquiresleep</h3>
+<p>&#x53D6;&#x9501;</p>
+<pre><code>void acquiresleep(struct sleeplock *lk)
+{
+    acquire(&amp;lk-&gt;lk); // &#x4F18;&#x5148;&#x7EA7;:-&gt;&#x9AD8;&#x4E8E;&amp;
+    while (lk-&gt;locked) { // &#x5F53;&#x9501;&#x5DF2;&#x88AB;&#x5176;&#x4ED6;&#x8FDB;&#x7A0B;&#x53D6;&#x8D70;
+        sleep(lk, &amp;lk-&gt;lk); // &#x4F11;&#x7720;
+    }
+    lk-&gt;locked = 1; // &#x4E0A;&#x9501;
+    lk-&gt;pid = myproc()-&gt;pid; // &#x53D6;&#x9501;&#x8FDB;&#x7A0B;&#x7684;pid
+    release(&amp;lk-&gt;lk);
+}
+</code></pre><p>acquiresleep()&#x5728;&#x83B7;&#x53D6;sleeplock&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x4F7F;&#x7528;&#x5176;&#x4E2D;&#x7684;spinlock&#x4FDD;&#x8BC1;&#x51FD;&#x6570;&#x7684;&#x539F;&#x5B50;&#x6027;&#x3002;&#x5148;&#x83B7;&#x53D6;&#x5BF9;&#x5E94;&#x7684;spinlock&#xFF0C;&#x7136;&#x540E;&#x5224;&#x65AD;&#x8981;&#x83B7;&#x53D6;&#x7684;&#x9501;&#x662F;&#x5426;&#x5DF2;&#x88AB;&#x6301;&#x6709;&#xFF0C;&#x5982;&#x679C;&#x88AB;&#x6301;&#x6709;&#x5219;&#x8FDB;&#x5165;&#x7761;&#x7720;&#xFF0C;&#x5F53;&#x4ECE;&#x7761;&#x7720;&#x9192;&#x6765;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x91CD;&#x65B0;&#x83B7;&#x53D6;spinlock&#x3002;&#x5982;&#x679C;&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x9501;&#xFF0C;&#x5C31;&#x6539;&#x53D8;locked&#x548C;pid&#xFF0C;&#x7136;&#x540E;&#x91CA;&#x653E;spinlock&#x3002;&#x8FDB;&#x5165;sleep&#x51FD;&#x6570;&#x65F6;&#xFF0C;&#x4F1A;&#x83B7;&#x53D6;&#x5F53;&#x524D;&#x8FDB;&#x7A0B;&#x7684;lock&#xFF0C;&#x7136;&#x540E;&#x91CA;&#x653E;sleeplock&#x7684;&#x81EA;&#x65CB;&#x9501;&#xFF0C;&#x800C;sleep&#x51FD;&#x6570;&#x7ED3;&#x675F;&#x65F6;&#x4F1A;&#x91CA;&#x653E;&#x8FDB;&#x7A0B;&#x7684;&#x9501;&#xFF0C;&#x83B7;&#x53D6;&#x7761;&#x7720;&#x9501;&#x7684;&#x9501;&#x3002;&#x51FD;&#x6570;&#x91C7;&#x7528;while&#x8BED;&#x53E5;&#xFF0C;&#x8BA9;&#x6BCF;&#x6B21;&#x8FDB;&#x7A0B;&#x88AB;&#x5524;&#x9192;&#x65F6;&#x90FD;&#x68C0;&#x67E5;&#x7B49;&#x5F85;&#x7684;&#x6761;&#x4EF6;&#x662F;&#x5426;&#x6EE1;&#x8DB3;&#xFF0C;&#x9632;&#x6B62;&#x51FA;&#x73B0;&#x4E00;&#x4E2A;&#x7761;&#x7720;&#x8FDB;&#x7A0B;&#x7B49;&#x5F85;&#x7684;&#x9501;&#x6CA1;&#x6709;&#x7A7A;&#x95F2;&#x5C31;&#x88AB;&#x5524;&#x9192;&#x7684;&#x60C5;&#x51B5;&#x3002;</p>
+<h3 id="releasesleep">releasesleep</h3>
+<p>&#x89E3;&#x9501;</p>
+<pre><code>void releasesleep(struct sleeplock *lk)
+{
+    acquire(&amp;lk-&gt;lk); //&#x53D6;&#x81EA;&#x65CB;&#x9501;
+    lk-&gt;locked = 0;
+    lk-&gt;pid = 0;
+    wakeup(lk); //&#x5524;&#x9192;
+    release(&amp;lk-&gt;lk);
+}
+</code></pre><p>releasesleep()&#x540C;&#x6837;&#x4F7F;&#x7528;&#x81EA;&#x65CB;&#x9501;&#x7EF4;&#x62A4;&#x539F;&#x5B50;&#x6027;&#xFF0C;&#x91CA;&#x653E;&#x65F6;&#x628A;&#x9501;&#x7684;pid&#x548C;locked&#x503C;&#x8BBE;&#x4E3A;0&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;wakeup&#x51FD;&#x6570;&#xFF0C;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x5BF9;&#x8BBE;&#x7F6E;&#x8FDB;&#x7A0B;&#x72B6;&#x6001;p-&gt;state=RUNNABLE&#x7684;&#x5305;&#x88C5;&#x3002;</p>
+<blockquote>
+<p>&#x4E3A;&#x4EC0;&#x4E48; sleeplock &#x8FD8;&#x9700;&#x8981;&#x4E00;&#x4E2A; spinlock &#x6765;&#x4FDD;&#x62A4;&#xFF1F;</p>
+</blockquote>
+<p>&#x5982;&#x679C;&#x4E0D;&#x9002;&#x7528;spinlock&#xFF08;&#x81EA;&#x65CB;&#x9501;&#xFF09;&#x4FDD;&#x62A4;&#xFF0C;sleeplock&#x672A;&#x88AB;&#x6301;&#x6709;&#x65F6;&#xFF0C;&#x4E24;&#x4E2A;&#x8FDB;&#x7A0B;&#x76F8;&#x7EE7;&#x7533;&#x8BF7;&#x9501;&#xFF0C;&#x90FD;&#x65E0;&#x6CD5;&#x4E0A;&#x9501;&#x3002;&#x5F53;&#x8FDB;&#x7A0B;1&#x91CA;&#x653E;&#x9501;&#x65F6;&#xFF0C;&#x8FDB;&#x7A0B;2&#x7533;&#x8BF7;&#x8BE5;&#x9501;&#xFF0C;&#x4F7F;&#x963B;&#x585E;&#x961F;&#x5217;&#x8FDB;&#x7A0B;&#x548C;&#x8FDB;&#x7A0B;2&#x540C;&#x65F6;&#x6301;&#x6709;&#x8BE5;&#x9501;&#x3002;</p>
+<p>&#x9501;&#x7684;&#x987A;&#x5E8F;
+&#x5982;&#x679C;&#x4E00;&#x6BB5;&#x4EE3;&#x7801;&#x8981;&#x4F7F;&#x7528;&#x591A;&#x4E2A;&#x9501;&#xFF0C;&#x90A3;&#x4E48;&#x5FC5;&#x987B;&#x8981;&#x6CE8;&#x610F;&#x4EE3;&#x7801;&#x6BCF;&#x6B21;&#x8FD0;&#x884C;&#x90FD;&#x8981;&#x4EE5;&#x76F8;&#x540C;&#x7684;&#x987A;&#x5E8F;&#x83B7;&#x5F97;&#x9501;&#xFF0C;&#x5E76;&#x4EE5;&#x76F8;&#x53CD;&#x7684;&#x987A;&#x5E8F;&#x91CA;&#x653E;&#x9501;&#xFF0C;&#x5426;&#x5219;&#x5C31;&#x4F1A;&#x53D1;&#x751F;&#x6B7B;&#x9501;&#x3002;&#x5047;&#x8BBE;&#x67D0;&#x6BB5;&#x4EE3;&#x7801;&#x4E2D;&#x5B58;&#x5728;&#x4E24;&#x6761;&#x8DEF;&#x5F84;&#xFF0C;&#x8DEF;&#x5F84;1&#x83B7;&#x5F97;&#x9501;&#x7684;&#x987A;&#x5E8F;&#x662F; A&#x3001;B&#xFF0C;&#x800C;&#x8DEF;&#x5F84;2&#x83B7;&#x5F97;&#x9501;&#x7684;&#x987A;&#x5E8F;&#x662F; B&#x3001;A&#x3002;&#x90A3;&#x4E48;&#x5C31;&#x53EF;&#x80FD;1&#x4E2D;&#x6301;&#x6709;A&#xFF0C;2&#x4E2D;&#x6301;&#x6709;B&#xFF0C;&#x4E8C;&#x8005;&#x4E92;&#x76F8;&#x7B49;&#x4F20;&#x65E0;&#x6CD5;&#x7EE7;&#x7EED;&#x8FD0;&#x884C;&#xFF0C;&#x53D1;&#x751F;&#x6B7B;&#x9501;&#x3002;&#x4E3A;&#x4E86;&#x907F;&#x514D;&#x6B7B;&#x9501;&#xFF0C;&#x6240;&#x6709;&#x7684;&#x4EE3;&#x7801;&#x8DEF;&#x5F84;&#x83B7;&#x5F97;&#x9501;&#x7684;&#x987A;&#x5E8F;&#x5FC5;&#x987B;&#x76F8;&#x540C;&#x3002;&#x540C;&#x6837;&#x7684;&#xFF0C;&#x91CA;&#x653E;&#x9501;&#x5FC5;&#x987B;&#x4EE5;&#x83B7;&#x5F97;&#x7684;&#x76F8;&#x53CD;&#x987A;&#x5E8F;&#x8FD0;&#x884C;&#x3002;&#x52A0;&#x9501;&#x7684;&#x64CD;&#x4F5C;&#x5C31;&#x50CF;&#x7ED9;&#x4EE3;&#x7801;&#x52A0;&#x4E0A;&#x82B1;&#x62EC;&#x53F7;&#xFF0C;&#x5185;&#x5C42;&#x5BF9;&#x5E94;&#x5185;&#x5C42;&#xFF0C;&#x5916;&#x5C42;&#x5BF9;&#x5E94;&#x5916;&#x5C42;&#x3002;</p>
+<blockquote>
+<p>&#x83B7;&#x53D6;&#x7761;&#x7720;&#x9501;&#x65F6;&#xFF0C;&#x8FDB;&#x7A0B;&#x72B6;&#x6001;&#x7684;&#x8F6C;&#x6362;&#x8FC7;&#x7A0B; </p>
+</blockquote>
+<p><img src="assets/sleeplock_state.png" alt=""></p>
+<blockquote>
+<p>&#x5141;&#x8BB8;&#x4E24;&#x4E2A;&#x8FDB;&#x7A0B;&#x540C;&#x65F6;&#x4F7F;&#x7528;&#x4E34;&#x754C;&#x533A;&#x7684;&#x4FEE;&#x6539;</p>
+</blockquote>
+<ul>
+<li>&#x7761;&#x7720;&#x9501;&#x4E2D;&#x7684; sleep() &#x548C; wakeup() &#x5C5E;&#x4E8E;&#x4E92;&#x65A5;&#x540C;&#x6B65;&#x4E2D;&#x7684;&#x963B;&#x585E;&#x64CD;&#x4F5C;&#x3002;</li>
+<li>&#x8C03;&#x7528;sem_init&#xFF0C;&#x4F20;&#x5165;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x6307;&#x9488;&#xFF0C;&#x521D;&#x59CB;&#x503C;&#x8BBE;&#x7F6E;&#x4E3A;0&#xFF0C;&#x8868;&#x660E;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x8BA1;&#x6570;&#x4FE1;&#x53F7;&#x91CF;counting semaphore</li>
+<li>&#x5C06;&#x539F;&#x6765;acquire&#x548C;release&#x4E2D;&#x7684;p-&gt;lock&#x5224;&#x65AD;&#x4FEE;&#x6539;&#x4E3A;&#xFF1A;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x503C;&#x5C0F;&#x4E8E;2&#x3001;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x503C;&#x51CF;1</li>
+</ul>
+<blockquote>
+<p>acquiresleep() &#x8C03;&#x7528;&#x7684; sleep() &#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x4E3A;&#x4EC0;&#x4E48;&#x5728;&#x8C03;&#x7528; acquire(&amp;p-&gt;lock) &#x540E;&#x7D27;&#x63A5;&#x7740;&#x8C03;&#x7528; release(lk) &#xFF1F; 
+acquire(&amp;p-&gt;lock) &#x548C; release(lk) &#x4E24;&#x884C;&#x7684;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x80FD;&#x5426;&#x4E92;&#x6362;&#xFF1F;</p>
+</blockquote>
+<p>&#x8C03;&#x7528;&#x8FDB;&#x7A0B;&#x4ECE;acquire(lk)&#x5F00;&#x59CB;&#x5C31;&#x6301;&#x6709;lk&#xFF0C;&#x76F4;&#x5230;&#x5728;sleep&#x4E2D;&#x83B7;&#x53D6;&#x4E86;p-&gt;lock&#x4E4B;&#x540E;&#x624D;&#x91CA;&#x653E;lk&#xFF0C;&#x4FDD;&#x8BC1;&#x4E86;&#x5728;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x4E0D;&#x4F1A;&#x6709;&#x522B;&#x7684;wakeup(chan)&#x88AB;&#x8C03;&#x7528;&#x3002; &#x5F53;sleep&#x83B7;&#x53D6;&#x4E86;p-&gt;lock&#x7136;&#x540E;&#x91CA;&#x653E;lk&#x4E4B;&#x540E;&#xFF0C;&#x5176;&#x5B83;&#x7684;wakeup(chan)&#x8C03;&#x7528;&#x867D;&#x7136;&#x53EF;&#x4EE5;&#x5F00;&#x59CB;&#x6267;&#x884C;&#xFF0C;&#x4F46;&#x662F;&#x53C8;&#x4F1A;&#x963B;&#x585E;&#x5728;&#x83B7;&#x53D6;p-&gt;lock&#x4E0A;&#xFF0C;&#x7B49;&#x5F85;&#x76F4;&#x5230;sleep&#x5C06;&#x8C03;&#x7528;&#x8FDB;&#x7A0B;&#x6302;&#x8D77;&#xFF0C;&#x56E0;&#x6B64;&#x4E0D;&#x4F1A;&#x6709;&#x5524;&#x9192;&#x4E22;&#x5931;wake loss&#xFF08;&#x5373;&#x4E00;&#x4E2A;&#x6B63;&#x5728;&#x7761;&#x7720;&#x7684;&#x8FDB;&#x7A0B;&#x9519;&#x8FC7;&#x4E86;&#x5524;&#x9192;&#x6267;&#x884C;&#x7684;&#x673A;&#x4F1A;&#xFF09;&#x7684;&#x95EE;&#x9898;&#x3002; </p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="linuxsleeplockupanddown.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: LinuxSleeplockUp&Down">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Xv6Sleeplock","level":"1.3","depth":1,"previous":{"title":"LinuxSleeplockUp&Down","level":"1.2","depth":1,"path":"linuxsleeplockupanddown.md","ref":"linuxsleeplockupanddown.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":["livereload"],"pluginsConfig":{"livereload":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"xv6sleeplock.md","mtime":"2023-11-01T06:37:46.724Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2023-11-01T06:57:38.044Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-livereload/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
